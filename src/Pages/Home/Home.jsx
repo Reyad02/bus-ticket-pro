@@ -1,8 +1,10 @@
+import Second_Part from "./Second_part/Second_Part";
 
 const Home = () => {
     return (
         <div>
-            This is Home
+            {/* <Hero></Hero> */}
+            <Second_Part></Second_Part>
         </div>
     );
 };
