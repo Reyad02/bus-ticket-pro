@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
 import FAQ from "../Pages/FAQ/FAQ";
+import Blog from "../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,12 @@ const router = createBrowserRouter([
             {
                 path: "/FAQ",
                 element: <FAQ></FAQ>
-            }
+            },
+            {
+                path: "/blog",
+                element: <Blog></Blog>
+            },
+
         ],
     },
 ]);
