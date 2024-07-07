@@ -17,8 +17,8 @@ const Contact = () => {
         e.preventDefault();
 
         emailjs
-            .sendForm('service_7waytjj', 'template_gfazsv4', form.current, {
-                publicKey: 'N-BKZh8h2q8OtgJ-J',
+            .sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, form.current, {
+                publicKey: import.meta.env.VITE_PUBLIC_KEY,
             })
             .then(
                 () => {
