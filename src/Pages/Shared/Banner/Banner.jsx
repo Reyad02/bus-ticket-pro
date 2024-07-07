@@ -6,7 +6,7 @@ const Banner = ({ title }) => {
                 className="hero h-56"
                 style={{
                     backgroundImage: "url(https://i.postimg.cc/05ppVWJk/desktop-flix-hero-q4-2021.jpg)",
-                    "background-position": "top",
+                    "backgroundPosition": "top",
 
                 }}>
                 <div className="hero-overlay bg-opacity-60"></div>
