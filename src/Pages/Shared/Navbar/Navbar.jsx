@@ -2,7 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../public/logo.png"
 
 
-const Navbar = () => {
+const Navbar = ({isSticky}) => {
+
     const navlink = <>
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to={"/about"}>About</NavLink></li>
@@ -13,7 +14,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="bg-base-100 drop-shadow-lg ">
+        <div className={`bg-base-100 drop-shadow-lg ${isSticky ? 'fixed top-0 w-full transition' : ''}`}>
             <div className="navbar  mx-auto max-w-7xl">
                 <div className="navbar-start">
                     <div className="dropdown">
