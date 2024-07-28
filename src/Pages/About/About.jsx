@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../Shared/Banner/Banner";
 
 const About = () => {
     return (
         <div>
+            <Helmet>
+                <title>Ticket Pro - About</title>
+            </Helmet>
             <Banner title={"About"}></Banner>
             <div className="max-w-7xl mx-auto">
 

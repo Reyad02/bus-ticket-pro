@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../Shared/Banner/Banner";
 import Card from "../Shared/Card/Card";
 
 const Blog = () => {
     return (
         <div>
+            <Helmet>
+                <title>Ticket Pro - Blog</title>
+            </Helmet>
             <Banner title={"Blog Page"}></Banner>
             <div className="max-w-7xl mx-auto my-10 ">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 ">

@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import TopAddress from '../Pages/Shared/TopAddress/TopAddress';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 import Footer from '../Pages/Shared/Footer/Footer';
+import axios from 'axios';
+
+axios.defaults.baseURL="http://localhost:3000";
 
 const Main = () => {
     const [scrollY, setScrollY] = useState(0);
@@ -22,10 +25,10 @@ const Main = () => {
     return (
         <div>
             <TopAddress />
-            <div className='relative z-50 transition '>
+            <div className='relative z-50  '>
                 <Navbar isSticky={scrollY >= 50} />
             </div>
-            <div className='relative z-10 transition'>
+            <div className='relative z-10 '>
                 <Outlet />
             </div>
             <Footer />

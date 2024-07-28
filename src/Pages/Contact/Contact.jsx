@@ -7,6 +7,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'; // Ensure you import the CSS
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -31,6 +32,9 @@ const Contact = () => {
     };
     return (
         <div>
+            <Helmet>
+                <title>Ticket Pro - Contact</title>
+            </Helmet>
             <Banner title={"Contact Us"}></Banner>
             <SectionTitle title={"Let's get in touch"} subTitle={"We are open for any suggestion or just to have a chat"}></SectionTitle>
             <div className="max-w-7xl mx-auto">

@@ -1,7 +1,8 @@
+import axios from "axios";
 import { CgCalendarDates } from "react-icons/cg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import Select from 'react-dropdown-select';
 import { IoLocation } from "react-icons/io5";
@@ -9,10 +10,27 @@ import { IoLocation } from "react-icons/io5";
 const Hero = () => {
     const [startDate, setStartDate] = useState(null);
     const [pickupPoint, setPickupPoint] = useState(null);
+    const [droppingPoint, setDroppingPoint] = useState(null);
+    const [allAreas, setAllareas] = useState([]);
     const handleChange = (date) => {
         setStartDate(date);
     };
- 
+
+    useEffect(() => {
+        axios.get('/area')
+            .then(function (response) {
+                setAllareas(response.data)
+                // handle success
+                // console.log(allAreas);
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+
+
     const pickUpPoints = [
         { label: "Gabtoli", value: "Gabtoli" },
         { label: "Sayedabad", value: "Sayedabad" },
@@ -42,24 +60,24 @@ const Hero = () => {
         <div className="bg-transparent">
             <div className="hero  relative z-50">
                 <div className="hero-content w-full flex-col lg:flex-row ">
-                    <div className="text-center lg:text-left w-1/2 space-y-6">
+                    <div className="text-center lg:text-left lg:w-1/2 space-y-6">
                         <h1 className="text-5xl font-bold">Get Your Ticket Online, <br />Easy and Safely</h1>
                         <button className="text-white font-bold uppercase btn bg-[#26A85E] ">
                             Get Ticket Now
                         </button>
                     </div>
-                    <div className="w-5/12">
+                    <div className="lg:w-5/12  ">
                         <p className="text-black text-2xl font-semibold mb-8">Choose Your Ticket</p>
-                        <div className="card bg-base-100  shadow-2xl flex-1">
+                        <div className="card bg-base-100 shadow-2xl flex-1">
                             <form className="card-body">
-                                <div className="flex gap-2 ">
+                                <div className="flex gap-2 flex-col md:flex-row ">
 
                                     {/* pickupPoint */}
                                     <div className="form-control w-1/2 ">
                                         <Select
-                                            className="input pl-12  "
+                                            className="input pl-12 shadow-lg"
                                             placeholder="Pickup Point"
-                                            options={pickUpPoints}
+                                            options={allAreas}
                                             style={{
                                                 paddingLeft: '2.75rem',
                                                 fontSize: '1.2rem',
@@ -77,15 +95,15 @@ const Hero = () => {
                                     {/* dropping point */}
                                     <div className="form-control w-1/2 ">
                                         <Select
-                                            className="input pl-12"
+                                            className="input pl-12 shadow-lg"
                                             placeholder="Dropping Point"
-                                            options={pickUpPoints}
+                                            options={allAreas}
                                             style={{
                                                 paddingLeft: '2.75rem',
                                                 fontSize: '1.2rem',
                                                 borderRadius: "0.5rem"
                                             }}
-                                            onChange={values => setPickupPoint(values[0].value)}
+                                            onChange={values => setDroppingPoint(values[0].value)}
 
                                         />
 
@@ -97,13 +115,13 @@ const Hero = () => {
 
                                 {/* date selection */}
                                 <div className="relative form-control mt-2">
-                                    <DatePicker selected={startDate} onChange={handleChange} className="input input-bordered w-full pl-12" placeholderText="Departure Date" />
+                                    <DatePicker selected={startDate} onChange={handleChange} className="input input-bordered w-full pl-12 shadow-lg" placeholderText="Departure Date" />
                                     <div className=" absolute pl-5 inset-y-0 flex items-center text-xl">
                                         <CgCalendarDates className="text-[#26A85E]" />
                                     </div>
                                 </div>
                                 <div className="flex justify-center items-center">
-                                    <div className="form-control mt-6 w-fit ">
+                                    <div className="form-control mt-4 w-fit ">
                                         <button className="btn  px-10 font-bold text-white bg-[#26A85E]">Find Tickets</button>
                                     </div>
                                 </div>

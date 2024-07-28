@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../Shared/Banner/Banner";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 
@@ -5,6 +6,9 @@ import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 const FAQ = () => {
     return (
         <div>
+            <Helmet>
+                <title>Ticket Pro - FAQs</title>
+            </Helmet>
             <Banner title={"FAQs"}></Banner>
             <SectionTitle title={"Frequently Asked Questions"} subTitle={"Nobis minus earum perferendis nemo cupiditate optio, rem neque incidunt quia laborum ut praesentium corporis quam exercitationem, atque illo aut excepturi cum."}></SectionTitle>
 
