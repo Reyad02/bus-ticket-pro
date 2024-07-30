@@ -6,55 +6,88 @@ import { useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import Select from 'react-dropdown-select';
 import { IoLocation } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Hero = () => {
     const [startDate, setStartDate] = useState(null);
-    const [pickupPoint, setPickupPoint] = useState(null);
-    const [droppingPoint, setDroppingPoint] = useState(null);
+    const [pickupPoint, setPickupPoint] = useState("");
+    const [droppingPoint, setDroppingPoint] = useState("");
     const [allAreas, setAllareas] = useState([]);
+
     const handleChange = (date) => {
         setStartDate(date);
     };
+
+    const handleTicketForm = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        if (pickupPoint === "") {
+            toast.error('Select Pickup Point!', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        else if (droppingPoint === "") {
+            toast.error("Select Dropping Point!", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        else if (pickupPoint === droppingPoint) {
+            toast.error("Must Have To Choose Different Pickup Point and Different Dropping Point!", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        else if (!startDate) {
+            toast.error("Select Your Journey Date!", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+    }
 
     useEffect(() => {
         axios.get('/area')
             .then(function (response) {
                 setAllareas(response.data)
-                // handle success
-                // console.log(allAreas);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
-
-
-    const pickUpPoints = [
-        { label: "Gabtoli", value: "Gabtoli" },
-        { label: "Sayedabad", value: "Sayedabad" },
-        { label: "Mohakhali", value: "Mohakhali" },
-        { label: "Kallyanpur", value: "Kallyanpur" },
-        { label: "Kamalapur", value: "Kamalapur" },
-        { label: "Uttara Sector 7", value: "Uttara Sector 7" },
-        { label: "Shyamoli", value: "Shyamoli" },
-        { label: "Farmgate", value: "Farmgate" },
-        { label: "Dampara", value: "Dampara" },
-        { label: "BRTC Bus Stand", value: "BRTC Bus Stand" },
-        { label: "Kadamtali", value: "Kadamtali" },
-        { label: "Kodomttoli", value: "Kodomttoli" },
-        { label: "Sonadanga", value: "Sonadanga" },
-        { label: "Royal Mor", value: "Royal Mor" },
-        { label: "Nawdapara", value: "Nawdapara" },
-        { label: "Shaheb Bazar", value: "Shaheb Bazar" },
-        { label: "Nathullabad", value: "Nathullabad" },
-        { label: "Rupatoli", value: "Rupatoli" },
-        { label: "Modern Mor", value: "Modern Mor" },
-        { label: "Kandirpar", value: "Kandirpar" },
-        { label: "Jhautola", value: "Jhautola" }
-    ];
-
 
     return (
         <div className="bg-transparent">
@@ -69,19 +102,20 @@ const Hero = () => {
                     <div className="lg:w-5/12  ">
                         <p className="text-black text-2xl font-semibold mb-8">Choose Your Ticket</p>
                         <div className="card bg-base-100 shadow-2xl flex-1">
-                            <form className="card-body">
+                            <form className="card-body" onSubmit={handleTicketForm}>
                                 <div className="flex gap-2 flex-col md:flex-row ">
 
                                     {/* pickupPoint */}
                                     <div className="form-control w-1/2 ">
                                         <Select
-                                            className="input pl-12 shadow-lg"
+                                            className="input pl-12 shadow-lg "
                                             placeholder="Pickup Point"
                                             options={allAreas}
+                                            color="#26A85E"
                                             style={{
                                                 paddingLeft: '2.75rem',
                                                 fontSize: '1.2rem',
-                                                borderRadius: "0.5rem"
+                                                borderRadius: "0.5rem",
                                             }}
                                             onChange={values => setPickupPoint(values[0].value)}
 
@@ -98,6 +132,7 @@ const Hero = () => {
                                             className="input pl-12 shadow-lg"
                                             placeholder="Dropping Point"
                                             options={allAreas}
+                                            color="#26A85E"
                                             style={{
                                                 paddingLeft: '2.75rem',
                                                 fontSize: '1.2rem',
@@ -115,7 +150,7 @@ const Hero = () => {
 
                                 {/* date selection */}
                                 <div className="relative form-control mt-2">
-                                    <DatePicker selected={startDate} onChange={handleChange} className="input input-bordered w-full pl-12 shadow-lg" placeholderText="Departure Date" />
+                                    <DatePicker selected={startDate} minDate={new Date()} onChange={handleChange} className="input input-bordered w-full pl-12 shadow-lg hover:border-[#26A85E] cursor-pointer " placeholderText="Departure Date" />
                                     <div className=" absolute pl-5 inset-y-0 flex items-center text-xl">
                                         <CgCalendarDates className="text-[#26A85E]" />
                                     </div>
@@ -126,6 +161,18 @@ const Hero = () => {
                                     </div>
                                 </div>
                             </form>
+                            <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme="dark"
+                            />
                         </div>
                     </div>
                 </div>
