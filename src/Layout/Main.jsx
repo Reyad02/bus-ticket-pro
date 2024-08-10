@@ -9,6 +9,8 @@ axios.defaults.baseURL="http://localhost:3000";
 
 const Main = () => {
     const [scrollY, setScrollY] = useState(0);
+    const [bus, setBus] = useState([]);
+    
 
     useEffect(() => {
         const handleScroll = () => {

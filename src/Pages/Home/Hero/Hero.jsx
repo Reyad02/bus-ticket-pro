@@ -2,18 +2,28 @@ import axios from "axios";
 import { CgCalendarDates } from "react-icons/cg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import Select from 'react-dropdown-select';
 import { IoLocation } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { removePoint, setPoints } from "../../../utils/storage";
+import { useNavigate } from "react-router-dom";
+// import useBuses from "../../../Hooks/useBuses";
+import { BusContext } from "../../../provider/BusProvider";
+import axiosBusInfo from "../../../utils/axiosBusInfo";
 
 const Hero = () => {
     const [startDate, setStartDate] = useState(null);
     const [pickupPoint, setPickupPoint] = useState("");
     const [droppingPoint, setDroppingPoint] = useState("");
     const [allAreas, setAllareas] = useState([]);
+    const navigate = useNavigate();
+    // const { setBus } = useBuses();
+    const { setBus } = useContext(BusContext);
+
+
 
     const handleChange = (date) => {
         setStartDate(date);
@@ -73,6 +83,33 @@ const Hero = () => {
                 theme: "dark",
             });
             return;
+        }
+        else {
+            axiosBusInfo({ pickupPoint: pickupPoint, droppingPoint: droppingPoint })
+                .then(response => {
+                    if (response.data === "nothing") {
+                        // navigate("/");
+                        toast.error("No Bus Available!", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                    }
+                    else {
+                        setBus(response.data)
+                        removePoint();
+                        setPoints(pickupPoint, droppingPoint);
+                        navigate("/ticket")
+                    }
+                })
+                .catch(error => {
+                    console.error('Error making GET request:', error);
+                });
         }
 
     }

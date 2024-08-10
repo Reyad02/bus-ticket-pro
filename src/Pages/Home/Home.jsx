@@ -2,7 +2,7 @@ import Hero from "./Hero/Hero";
 import Second_Part from "./Second_part/Second_Part";
 import { Helmet } from 'react-helmet-async';
 
-const Home = () => {
+const Home = ({bus, setBus}) => {
     return (
         <div>
             <Helmet>
