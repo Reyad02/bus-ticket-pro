@@ -8,6 +8,7 @@ import Contact from "../Pages/Contact/Contact";
 import Ticket from "../Pages/Ticket/Ticket";
 import BusTicket from "../Pages/BusTicket/BusTicket";
 import Registration from "../Pages/Registration/Registration";
+import Login from "../Pages/Login/Login";
 
 const router = createBrowserRouter([
     {
@@ -46,7 +47,10 @@ const router = createBrowserRouter([
                 path: "/registration",
                 element: <Registration></Registration>, 
             },
-
+            {
+                path: "/Signin",
+                element: <Login></Login>, 
+            },
         ],
     },
 ]);

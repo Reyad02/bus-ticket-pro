@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import { TbSteeringWheel } from "react-icons/tb";
 import { TbDoorExit } from "react-icons/tb";
 import { getPoints, setPoints } from "../../utils/storage";
@@ -14,9 +14,12 @@ const BusTicket = () => {
     const { pickPoint, dropPoint, journeyDate } = getPoints();
     const { bus_name } = useParams();
     const [busInfo, setBusInfo] = useState(null);
-    const [selectedSeats, setSelectedSeats] = useState([]);
+    const [selectedSeats, setSelectedSeats] = useState(localStorage.getItem("seats").split(',')  || []);
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(localStorage.getItem("seats"));
 
-    console.log(busInfo)
+    // console.log(busInfo)
     const handleSeat = (seat) => {
         if (selectedSeats.includes(seat)) {
             const filterSeat = selectedSeats.filter(s => s !== seat);
@@ -37,20 +40,16 @@ const BusTicket = () => {
             confirmButtonText: "Confirm"
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.setItem("seats", selectedSeats);
                 if (user) {
                     Swal.fire({
                         title: "Confirmed!",
                         text: "Your seat has been confirmed.",
                         icon: "success"
                     });
-                    localStorage.setItem("seats", selectedSeats);
                 }
-                else{
-                    Swal.fire({
-                        title: "Login!",
-                        text: "Plz Login to confirm.",
-                        icon: "warning"
-                    });
+                else {
+                    navigate("/Signin", { state: location })
                 }
             }
         });
