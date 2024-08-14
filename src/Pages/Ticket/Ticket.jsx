@@ -84,7 +84,7 @@ const Ticket = () => {
     return (
         <div className="">
             <Helmet>
-                <title>Ticket Pro - FAQs</title>
+                <title>Ticket Pro - Ticket</title>
             </Helmet>
             <Banner title={"Ticket"}></Banner>
             {/* {bus} */}

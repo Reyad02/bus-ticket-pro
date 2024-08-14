@@ -7,6 +7,7 @@ import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Ticket from "../Pages/Ticket/Ticket";
 import BusTicket from "../Pages/BusTicket/BusTicket";
+import Registration from "../Pages/Registration/Registration";
 
 const router = createBrowserRouter([
     {
@@ -39,8 +40,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/ticket/:bus_name",
-                element: <BusTicket></BusTicket>,
-                
+                element: <BusTicket></BusTicket>, 
+            },
+            {
+                path: "/registration",
+                element: <Registration></Registration>, 
             },
 
         ],

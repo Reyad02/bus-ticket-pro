@@ -28,7 +28,7 @@ const TopAddress = () => {
                         <p>Sing In</p>
                     </Link>
                     <p>/</p>
-                    <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 rounded-md " to={"/Signup"}>
+                    <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 rounded-md " to={"/registration"}>
                         <FaUserPlus></FaUserPlus>
                         <p>Sing Up</p>
                     </Link>
