@@ -103,7 +103,7 @@ const Hero = () => {
                     else {
                         setBus(response.data)
                         removePoint();
-                        setPoints(pickupPoint, droppingPoint);
+                        setPoints(pickupPoint, droppingPoint, startDate.toLocaleDateString('en-GB'));
                         navigate("/ticket")
                     }
                 })

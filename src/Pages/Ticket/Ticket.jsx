@@ -139,7 +139,7 @@ const Ticket = () => {
                                             <div className=" flex flex-col justify-center items-center gap-2">
                                                 <p className="text-xl text-[#15803D]">${eachBus.price}.00</p>
                                                 <p className="text-sm">Off Days: <span className="badge badge-primary badge-outline text-xs bg-[#EAE8FD]">{eachBus.off_days[0]}</span></p>
-                                                <Link className="text-white bg-[#15803D] rounded-md py-1 px-2">Select Seat</Link>
+                                                <Link to={`/ticket/${eachBus.bus_num}`} className="text-white bg-[#15803D] rounded-md py-1 px-2">Select Seat</Link>
                                             </div>
                                         </div>
                                         <div className="pt-4 flex gap-2 text-lg">
