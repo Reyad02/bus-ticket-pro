@@ -57,7 +57,9 @@ const BusTicket = () => {
                         seats: selectedSeats,
                         money: selectedSeats.length * busInfo.price,
                         token: localStorage.getItem("token"),
-                        name: user?.displayName
+                        name: user?.displayName,
+                        pickPoint: pickPoint,
+                        dropPoint: dropPoint
                     }
                     axios.post("/order", info).then(res => {
                         console.log(res.data.url)

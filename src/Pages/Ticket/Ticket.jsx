@@ -1,19 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-// import useBuses from "../../Hooks/useBuses";
 import { getPoints } from "../../utils/storage";
 import { BusContext } from "../../provider/BusProvider";
 import { Helmet } from "react-helmet-async";
 import Banner from "../Shared/Banner/Banner";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import axiosBusInfo from "../../utils/axiosBusInfo";
 import { FaBus } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
-
-
+import moment from 'moment';
 
 const Ticket = () => {
-    const { pickPoint, dropPoint } = getPoints();
+    const { pickPoint, dropPoint, journeyDate } = getPoints();
+    const currentDate = new Date().toLocaleDateString('en-GB');
     const { bus, setBus } = useContext(BusContext);
     const [filterBus, setFilterBus] = useState([]);
     const [acBus, setAcBus] = useState(false);
@@ -74,13 +72,21 @@ const Ticket = () => {
     useEffect(() => {
         axiosBusInfo({ pickupPoint: pickPoint, droppingPoint: dropPoint })
             .then(response => {
-                setBus(response.data)
-                setFilterBus(response.data);
+                const currentTime = new Date();
+                const filteredDateBuses = journeyDate === currentDate ?
+                    response.data.filter(b => {
+                        const departureTime = moment(b.departure_time, 'HH:mm A').toDate();
+                        return departureTime >= currentTime;
+                    }) : response.data;
+
+                setBus(filteredDateBuses)
+                setFilterBus(filteredDateBuses);
             })
             .catch(error => {
                 console.error('Error making GET request:', error);
             });
-    }, [pickPoint, dropPoint, setBus])
+    }, [currentDate, setBus, journeyDate, pickPoint, dropPoint])
+    
     return (
         <div className="">
             <Helmet>
