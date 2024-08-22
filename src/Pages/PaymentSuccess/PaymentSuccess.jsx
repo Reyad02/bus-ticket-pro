@@ -71,6 +71,10 @@ const PaymentSuccess = () => {
             .catch(err => {
                 console.error("Error fetching ticket data: ", err);
             });
+
+        localStorage.removeItem("seats");
+        localStorage.removeItem("bus_name");
+
     }, [id]);
 
     return (

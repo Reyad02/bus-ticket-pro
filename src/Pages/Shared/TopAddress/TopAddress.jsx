@@ -12,6 +12,7 @@ const TopAddress = () => {
     const { user, logout } = useContext(AuthContext);
     const handleLogout = () => {
         logout().then(() => {
+            
             // console.log("free the local storage item")
             // removePoint();
             // localStorage.removeItem("seats")

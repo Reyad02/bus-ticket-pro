@@ -7,23 +7,18 @@ import { getPoints } from "../../utils/storage";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 
-
-
 const BusTicket = () => {
     const { user } = useContext(AuthContext);
     const { pickPoint, dropPoint, journeyDate } = getPoints();
     const { bus_name } = useParams();
     const [busInfo, setBusInfo] = useState(null);
-    // const [selectedSeats, setSelectedSeats] = useState(localStorage.getItem("seats").split(',') || []);
     const [selectedSeats, setSelectedSeats] = useState(() => {
         const seats = localStorage.getItem("seats");
         return seats ? seats.split(',') : [];
     });
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(localStorage.getItem("seats"));
 
-    // console.log(busInfo)
     const handleSeat = (seat) => {
         if (selectedSeats.includes(seat)) {
             const filterSeat = selectedSeats.filter(s => s !== seat);
@@ -44,13 +39,9 @@ const BusTicket = () => {
             confirmButtonText: "Confirm"
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.setItem("bus_name", bus_name);
                 localStorage.setItem("seats", selectedSeats);
                 if (user) {
-                    // Swal.fire({
-                    //     title: "Confirmed!",
-                    //     text: "Your seat has been confirmed.",
-                    //     icon: "success"
-                    // });
                     const info = {
                         email: user?.email,
                         bus_name: bus_name,
@@ -61,24 +52,15 @@ const BusTicket = () => {
                         pickPoint: pickPoint,
                         dropPoint: dropPoint
                     }
+
                     axios.post("/order", info).then(res => {
                         console.log(res.data.url)
                         window.location.replace(res.data.url);
                     }).catch(error => {
                         if (error.response && error.response.status === 401) {
-                            // Swal.fire({
-                            //     title: "Unauthorized",
-                            //     text: "You need to sign in to book seats.",
-                            //     icon: "error"
-                            // });
                             console.log(error)
                             navigate("/Signin", { state: location });
                         } else {
-                            // Swal.fire({
-                            //     title: "Error",
-                            //     text: "Something went wrong. Please try again later.",
-                            //     icon: "error"
-                            // });
                             console.log("2nd", error);
                         }
                     }
@@ -112,11 +94,15 @@ const BusTicket = () => {
             }
         }).then(response => {
             setBusInfo(response.data)
-            // console.log(busInfo)
         })
             .catch(error => {
                 console.error('Error making GET request:', error);
             });
+
+        if (bus_name !== localStorage.getItem("bus_name")) {
+            setSelectedSeats([]);
+        }
+
     }, [bus_name])
 
     if (busInfo === null) {
