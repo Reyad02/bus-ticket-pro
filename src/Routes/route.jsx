@@ -9,6 +9,8 @@ import Ticket from "../Pages/Ticket/Ticket";
 import BusTicket from "../Pages/BusTicket/BusTicket";
 import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
             {
                 path: "/Signin",
                 element: <Login></Login>, 
+            },
+            {
+                path: "/paymentSuccess/:id",
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: "/paymentFail/:id",
+                element: <PaymentFail></PaymentFail>
             },
         ],
     },

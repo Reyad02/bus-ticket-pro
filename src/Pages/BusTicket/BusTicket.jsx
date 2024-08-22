@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { TbSteeringWheel } from "react-icons/tb";
 import { TbDoorExit } from "react-icons/tb";
-import { getPoints, setPoints } from "../../utils/storage";
+import { getPoints } from "../../utils/storage";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 
@@ -14,7 +14,11 @@ const BusTicket = () => {
     const { pickPoint, dropPoint, journeyDate } = getPoints();
     const { bus_name } = useParams();
     const [busInfo, setBusInfo] = useState(null);
-    const [selectedSeats, setSelectedSeats] = useState(localStorage.getItem("seats").split(',')  || []);
+    // const [selectedSeats, setSelectedSeats] = useState(localStorage.getItem("seats").split(',') || []);
+    const [selectedSeats, setSelectedSeats] = useState(() => {
+        const seats = localStorage.getItem("seats");
+        return seats ? seats.split(',') : [];
+    });
     const location = useLocation();
     const navigate = useNavigate();
     console.log(localStorage.getItem("seats"));
@@ -42,11 +46,41 @@ const BusTicket = () => {
             if (result.isConfirmed) {
                 localStorage.setItem("seats", selectedSeats);
                 if (user) {
-                    Swal.fire({
-                        title: "Confirmed!",
-                        text: "Your seat has been confirmed.",
-                        icon: "success"
-                    });
+                    // Swal.fire({
+                    //     title: "Confirmed!",
+                    //     text: "Your seat has been confirmed.",
+                    //     icon: "success"
+                    // });
+                    const info = {
+                        email: user?.email,
+                        bus_name: bus_name,
+                        seats: selectedSeats,
+                        money: selectedSeats.length * busInfo.price,
+                        token: localStorage.getItem("token"),
+                        name: user?.displayName
+                    }
+                    axios.post("/order", info).then(res => {
+                        console.log(res.data.url)
+                        window.location.replace(res.data.url);
+                    }).catch(error => {
+                        if (error.response && error.response.status === 401) {
+                            // Swal.fire({
+                            //     title: "Unauthorized",
+                            //     text: "You need to sign in to book seats.",
+                            //     icon: "error"
+                            // });
+                            console.log(error)
+                            navigate("/Signin", { state: location });
+                        } else {
+                            // Swal.fire({
+                            //     title: "Error",
+                            //     text: "Something went wrong. Please try again later.",
+                            //     icon: "error"
+                            // });
+                            console.log("2nd", error);
+                        }
+                    }
+                    )
                 }
                 else {
                     navigate("/Signin", { state: location })
