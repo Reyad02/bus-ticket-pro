@@ -121,12 +121,12 @@ const BusTicket = () => {
                             {rows.map((row, index) => (
                                 <div className="flex items-center" key={index}>
                                     <div className="flex-1 flex justify-evenly">
-                                        <button className={`btn   rounded-xl hover:bg-transparent  ${selectedSeats.includes(row[0]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[0]]} id={row[0]} onClick={() => { handleSeat(row[0]) }}>{row[0]}</button>
-                                        <button className={`btn    rounded-xl hover:bg-transparent ${selectedSeats.includes(row[1]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[1]]} id={row[1]} onClick={() => { handleSeat(row[1]) }}>{row[1]}</button>
+                                        <button className={`btn rounded-xl hover:bg-transparent ${selectedSeats.includes(row[0]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[0]]} id={row[0]} onClick={() => { handleSeat(row[0]) }}>{row[0]}</button>
+                                        <button className={`btn rounded-xl hover:bg-transparent ${selectedSeats.includes(row[1]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[1]]} id={row[1]} onClick={() => { handleSeat(row[1]) }}>{row[1]}</button>
                                     </div>
                                     <div className="flex-1 flex justify-evenly">
-                                        <button className={`btn    rounded-xl hover:bg-transparent ${selectedSeats.includes(row[2]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[2]]} id={row[2]} onClick={() => { handleSeat(row[2]) }}>{row[2]}</button>
-                                        <button className={`btn    rounded-xl hover:bg-transparent ${selectedSeats.includes(row[3]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[3]]} id={row[3]} onClick={() => { handleSeat(row[3]) }}>{row[3]}</button>
+                                        <button className={`btn rounded-xl hover:bg-transparent ${selectedSeats.includes(row[2]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[2]]} id={row[2]} onClick={() => { handleSeat(row[2]) }}>{row[2]}</button>
+                                        <button className={`btn rounded-xl hover:bg-transparent ${selectedSeats.includes(row[3]) ? 'bg-[#26A85E] text-white hover:text-black' : ''}`} disabled={!busInfo.seats[row[3]]} id={row[3]} onClick={() => { handleSeat(row[3]) }}>{row[3]}</button>
                                     </div>
                                 </div>
                             ))}

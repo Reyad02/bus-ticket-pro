@@ -73,14 +73,14 @@ const Ticket = () => {
         axiosBusInfo({ pickupPoint: pickPoint, droppingPoint: dropPoint })
             .then(response => {
                 const currentTime = new Date();
-                const filteredDateBuses = 
-                // journeyDate === currentDate ?
-                //     response.data.filter(b => {
-                //         const departureTime = moment(b.departure_time, 'HH:mm A').toDate();
-                //         return departureTime >= currentTime;
-                //     }) 
-                //     : 
-                    response.data;
+                const filteredDateBuses =
+                    journeyDate === currentDate ?
+                        response.data.filter(b => {
+                            const departureTime = moment(b.departure_time, 'HH:mm A').toDate();
+                            return departureTime >= currentTime;
+                        })
+                        :
+                        response.data;
 
                 setBus(filteredDateBuses)
                 setFilterBus(filteredDateBuses);
@@ -89,7 +89,7 @@ const Ticket = () => {
                 console.error('Error making GET request:', error);
             });
     }, [currentDate, setBus, journeyDate, pickPoint, dropPoint])
-    
+
     return (
         <div className="">
             <Helmet>
