@@ -11,6 +11,8 @@ import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail/PaymentFail";
+import AdminDashboard from "../Layout/AdminDashboard";
+import PrivateRoute from "./PrivateRoute"
 
 const router = createBrowserRouter([
     {
@@ -43,15 +45,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/ticket/:bus_name",
-                element: <BusTicket></BusTicket>, 
+                element: <BusTicket></BusTicket>,
             },
             {
                 path: "/registration",
-                element: <Registration></Registration>, 
+                element: <Registration></Registration>,
             },
             {
                 path: "/Signin",
-                element: <Login></Login>, 
+                element: <Login></Login>,
             },
             {
                 path: "/paymentSuccess/:id",
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
                 element: <PaymentFail></PaymentFail>
             },
         ],
+    },
+    {
+        path: "/admin",
+        element: <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
     },
 ]);
 

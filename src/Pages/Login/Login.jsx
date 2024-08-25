@@ -19,7 +19,17 @@ const Login = () => {
             // Signed up 
             const user = userCredential.user;
             setError(null);
-            navigate(location?.state ? location?.state : "/")
+            console.log(location.state);
+            if (email === import.meta.env.VITE_ADMIN) {
+                navigate("/admin")
+            }
+            else {
+                if (location?.state == "/admin") {
+                    navigate("/")
+                } else {
+                    navigate(location?.state ? location?.state : "/")
+                }
+            }
         })
             .catch((error) => {
                 const errorCode = error.code;
