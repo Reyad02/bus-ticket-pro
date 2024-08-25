@@ -13,6 +13,7 @@ import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 import AdminDashboard from "../Layout/AdminDashboard";
 import PrivateRoute from "./PrivateRoute"
+import DashBoard from "../Pages/Admin/DashBoard/DashBoard";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,12 @@ const router = createBrowserRouter([
     {
         path: "/admin",
         element: <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
+        children: [
+            {
+                path: "/admin",
+                element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
+            }
+        ]
     },
 ]);
 
