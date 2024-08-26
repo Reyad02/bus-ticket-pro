@@ -14,6 +14,8 @@ import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 import AdminDashboard from "../Layout/AdminDashboard";
 import PrivateRoute from "./PrivateRoute"
 import DashBoard from "../Pages/Admin/DashBoard/DashBoard";
+import BusInfo from "../Pages/Admin/BusInfo/BusInfo";
+import BookedTicket from "../Pages/Admin/BookedTicket/BookedTicket";
 
 const router = createBrowserRouter([
     {
@@ -71,9 +73,17 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
         children: [
             {
-                path: "/admin",
+                path: "",
                 element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
-            }
+            },
+            {
+                path: "busInfo",
+                element: <PrivateRoute><BusInfo></BusInfo></PrivateRoute>
+            },
+            {
+                path: "ticketInfo",
+                element: <PrivateRoute><BookedTicket></BookedTicket></PrivateRoute>
+            },
         ]
     },
 ]);

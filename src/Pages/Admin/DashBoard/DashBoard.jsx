@@ -4,6 +4,7 @@ import { IoTicket } from "react-icons/io5";
 import { MdPlace } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const DashBoard = () => {
     const [totalPayment, setTotalPayment] = useState(0);
@@ -25,6 +26,9 @@ const DashBoard = () => {
     }, [])
     return (
         <div>
+            <Helmet>
+                <title>Ticket Pro - Admin Dashboard</title>
+            </Helmet>
             <h1 className="text-xl font-semibold">Dashboard</h1>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8 transition-all">
 
