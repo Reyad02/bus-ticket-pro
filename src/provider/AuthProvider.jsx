@@ -42,13 +42,13 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            console.log(currentUser);
+            // console.log(currentUser);
             const userEmail = { email: currentUser?.email || user?.email }
             if (currentUser) {
                 axios.post("/jwt", userEmail)
                     .then(res => {
                         // console.log("token response", res.data)
-                        console.log(res.data)
+                        // console.log(res.data)
                         localStorage.setItem("token", res.data);
                     })
             }else{
