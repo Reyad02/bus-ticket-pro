@@ -13,6 +13,7 @@ const BusInfo = () => {
     // const [busDetails, setBusDetails] = useState([]);
     const [selectedBus, setSelectedBus] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [route_options, setRoute_Options] = useState([]);
 
     const {
         register,
@@ -26,12 +27,12 @@ const BusInfo = () => {
         setIsModalOpen(false);
         data.token = localStorage.getItem("token"),
 
-        axios.put(`/busInfo/update/${data.bus_num}`, data)
-            .then(res => {
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                }
-            })
+            axios.put(`/busInfo/update/${data.bus_num}`, data)
+                .then(res => {
+                    if (res.data.modifiedCount > 0) {
+                        refetch();
+                    }
+                })
     }
 
     const timeStringToTime = (time) => {
@@ -53,6 +54,7 @@ const BusInfo = () => {
         setValue("departure_time", timeStringToTime(bus.departure_time));
         setValue("arrival_time", timeStringToTime(bus.arrival_time));
         setValue("price", bus.price);
+        setValue("routeName", bus?.route?.routeName)
         setIsModalOpen(true);
     }
 
@@ -72,12 +74,13 @@ const BusInfo = () => {
             })
     };
 
-    // useEffect(() => {
-    //     axios.get("/allBusInfo")
-    //         .then(response => {
-    //             setBusDetails(response.data);
-    //         })
-    // }, [])
+    useEffect(() => {
+        axios.get("/allRoutes")
+            .then(response => {
+                console.log(response.data)
+                setRoute_Options(response.data);
+            })
+    }, [])
 
     if (isError) {
         return <span>Error: {error.message}</span>
@@ -107,6 +110,7 @@ const BusInfo = () => {
                                 <tr className="bg-[#2B3440] text-[#D7DDE4]">
                                     <th>Bus Number</th>
                                     <th>Seat Layout</th>
+                                    {/* <th>Route</th> */}
                                     <th>Departure Time</th>
                                     <th>Arrival Time</th>
                                     <th>Amount</th>
@@ -119,12 +123,13 @@ const BusInfo = () => {
                                         <tr key={idx} className="hover">
                                             <td>{bus.bus_num}</td>
                                             <td>{bus.seat_layout}</td>
+                                            {/* <td>{bus.route_options[0]} - {bus.route_options[bus.route_options.length - 1]}</td> */}
                                             <td>{bus.departure_time}</td>
                                             <td>{bus.arrival_time}</td>
                                             <td>${bus.price}.00</td>
                                             <td className="flex justify-around">
-                                                <button className="btn bg-blue-200 text-blue-700" onClick={() => handleUpdate(bus)}>Update</button>
-                                                <button className="btn bg-red-200 text-red-700" onClick={() => handleDelete(bus.bus_num)}>Delete</button>
+                                                <button className="btn bg-blue-200 text-blue-700 btn-sm " onClick={() => handleUpdate(bus)}>Update</button>
+                                                <button className="btn bg-red-200 text-red-700 btn-sm " onClick={() => handleDelete(bus.bus_num)}>Delete</button>
                                             </td>
                                         </tr>
                                     ))
@@ -145,6 +150,16 @@ const BusInfo = () => {
                                     <p className="flex gap-2"><strong>Departure Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded" defaultValue={selectedBus.departure_time} {...register("departure_time")} /></p>
                                     <p className="flex gap-2"><strong>Arrival Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded" defaultValue={selectedBus.arrival_time} {...register("arrival_time")} /></p>
                                     <p className="flex gap-2"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" defaultValue={selectedBus.price} {...register("price")} /></p>
+                                    <p className="flex gap-2"><strong>Route:</strong>
+                                        <select className="border-[#2B3440] flex-1 pl-2 rounded" defaultValue={selectedBus?.route?.routeName} {...register("routeName")}>
+                                            {
+                                                route_options.map(eachRoute => (
+                                                    <option key={eachRoute._id} value={eachRoute.routeName}>{eachRoute.routeName}</option>
+
+                                                ))
+                                            }
+                                        </select>
+                                    </p>
 
                                     {errors.exampleRequired && <span>This field is required</span>}
 

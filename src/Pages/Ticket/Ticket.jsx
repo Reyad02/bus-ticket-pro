@@ -141,8 +141,8 @@ const Ticket = () => {
                                             <div className=" space-y-1">
                                                 <p className="flex gap-4 items-center font-semibold text-xl">{eachBus.departure_time} <span className="text-[#15803D]"><FaLongArrowAltRight></FaLongArrowAltRight></span> {eachBus.arrival_time}</p>
                                                 <div className=" flex justify-between px-4">
-                                                    <p className=" ">{eachBus.route_options[0]} </p>
-                                                    <p className="   ">{eachBus.route_options[eachBus.route_options.length - 1]}</p>
+                                                    <p className=" ">{eachBus?.route?.stops[0]} </p>
+                                                    <p className="   ">{eachBus?.route?.stops[eachBus?.route?.stops.length - 1]}</p>
                                                 </div>
                                             </div>
                                             <div className=" flex flex-col justify-center items-center gap-2">
