@@ -77,7 +77,7 @@ const BusInfo = () => {
     useEffect(() => {
         axios.get("/allRoutes")
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setRoute_Options(response.data);
             })
     }, [])
