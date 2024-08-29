@@ -115,8 +115,9 @@ const Hero = () => {
     }
 
     useEffect(() => {
-        axios.get('/area')
+        axios.get('/allStops')
             .then(function (response) {
+                console.log(response.data)
                 setAllareas(response.data)
                 // console.log(response.data);
             })

@@ -3,6 +3,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { FaBus } from "react-icons/fa";
 import { MdOutlinePayment } from "react-icons/md";
 import { FaBusAlt } from "react-icons/fa";
+import { MdPlace } from "react-icons/md";
 
 const AdminDashboard = () => {
     return (
@@ -24,6 +25,7 @@ const AdminDashboard = () => {
                             <li><NavLink to={"busInfo"}><FaBus/> Bus Details</NavLink></li>
                             <li><NavLink to={"ticketInfo"}><span className="text-lg"><MdOutlinePayment/></span> Booking History</NavLink></li>
                             <li><NavLink to={"add_Bus"}><span className=""><FaBusAlt/></span> Add New Bus</NavLink></li>
+                            <li><NavLink to={"add_Route"}><span className="text-lg"><MdPlace/></span> Add New Route</NavLink></li>
                         </ul>
                     </div>
                 </div>

@@ -68,7 +68,7 @@ const AddBus = () => {
                             <p className="flex gap-2 w-[48%]"><strong>Departure Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("departure_time")} /></p>
                         </div>
                         <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" {...register("price")} /></p>
+                            <p className="flex gap-2 w-[48%]"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder="$ 0.00" {...register("price")} /></p>
                             <p className="flex gap-2 w-[48%]"><strong>Type:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("type")}>
                                     <option value="AC">AC</option>
@@ -77,7 +77,7 @@ const AddBus = () => {
                             </p>
                         </div>
                         <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Facilities:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" {...register("facilities")} /></p>
+                            <p className="flex gap-2 w-[48%]"><strong>Facilities:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder={"Please write facilities using comma separated..."} {...register("facilities")} /></p>
                             <p className="flex gap-2 w-[48%]"><strong>Direction:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("isGoing")}>
                                     <option value={true}>Going</option>
@@ -85,16 +85,18 @@ const AddBus = () => {
                                 </select>
                             </p>
                         </div>
-                        <p className="flex gap-2"><strong>Route:</strong>
-                            <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("routeName")}>
-                                {
-                                    route_options.map(eachRoute => (
-                                        <option key={eachRoute._id} value={eachRoute.routeName}>{eachRoute.routeName}</option>
+                        <div className="flex gap-8">
+                            <p className="flex gap-2 w-[99%]"><strong>Route:</strong>
+                                <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("routeName")}>
+                                    {
+                                        route_options.map(eachRoute => (
+                                            <option key={eachRoute._id} value={eachRoute.routeName}>{eachRoute.routeName}</option>
 
-                                    ))
-                                }
-                            </select>
-                        </p>
+                                        ))
+                                    }
+                                </select>
+                            </p>
+                        </div>
 
                         {errors.exampleRequired && <span>This field is required</span>}
 

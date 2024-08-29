@@ -17,6 +17,7 @@ import DashBoard from "../Pages/Admin/DashBoard/DashBoard";
 import BusInfo from "../Pages/Admin/BusInfo/BusInfo";
 import BookedTicket from "../Pages/Admin/BookedTicket/BookedTicket";
 import AddBus from "../Pages/Admin/AddBus/AddBus";
+import AddRoute from "../Pages/Admin/AddRoute/AddRoute";
 
 const router = createBrowserRouter([
     {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
             {
                 path: "add_Bus",
                 element: <PrivateRoute><AddBus></AddBus></PrivateRoute>
+            },
+            {
+                path: "add_Route",
+                element: <PrivateRoute><AddRoute></AddRoute></PrivateRoute>
             },
         ]
     },
