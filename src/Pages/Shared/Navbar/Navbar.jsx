@@ -1,8 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../public/logo.png"
+import { useContext } from "react";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 
 const Navbar = ({isSticky}) => {
+    const { user } = useContext(AuthContext);
+
 
     const navlink = <>
         <li><NavLink to="/" >Home</NavLink></li>
@@ -10,6 +14,9 @@ const Navbar = ({isSticky}) => {
         <li><NavLink to={"/FAQ"}>FAQs</NavLink></li>
         <li><NavLink to={"/blog"}>Blog</NavLink></li>
         <li><NavLink to={"/contact"}>Contact</NavLink></li>
+        {
+           user ? user.email === import.meta.env.VITE_ADMIN ? <li><NavLink to={"/admin"}>Dashboard</NavLink></li> : <li><NavLink to={"/dashboard"}>Dashboard</NavLink></li> : <></>
+        }
     </>
 
 

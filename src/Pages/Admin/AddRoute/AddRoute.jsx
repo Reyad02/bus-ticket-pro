@@ -93,11 +93,11 @@ const AddRoute = () => {
                 {isModalOpen && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="modal-box bg-white p-6 rounded-lg">
-                            <h3 className="font-semibold text-xl ">Add New Route</h3>
+                            <h3 className="font-semibold text-xl mb-2">Add New Route</h3>
                             <form className="space-y-1" onSubmit={handleSubmit(onSubmit)}>
                                 {/* register your input into the hook by invoking the "register" function */}
-                                <p className="flex gap-2 "><strong>Route:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("routeName")} /></p>
-                                <p className="flex gap-2 "><strong>Bus Stops:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder={"Please write stops using comma separated..."} {...register("bus_stops")} /></p>
+                                <p className="flex gap-2 "><strong>Route:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded border"  {...register("routeName")} /></p>
+                                <p className="flex gap-2 "><strong>Bus Stops:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded border" placeholder={"Please write stops using comma separated..."} {...register("bus_stops")} /></p>
 
                                 {errors.exampleRequired && <span>This field is required</span>}
 

@@ -18,6 +18,7 @@ import BusInfo from "../Pages/Admin/BusInfo/BusInfo";
 import BookedTicket from "../Pages/Admin/BookedTicket/BookedTicket";
 import AddBus from "../Pages/Admin/AddBus/AddBus";
 import AddRoute from "../Pages/Admin/AddRoute/AddRoute";
+import UserDashboard from "../Pages/UserDashboard/UserDashboard";
 
 const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: "/paymentFail/:id",
                 element: <PaymentFail></PaymentFail>
+            },
+            {
+                path: "/dashboard",
+                element: <UserDashboard></UserDashboard>
             },
         ],
     },

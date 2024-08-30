@@ -1,9 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { IoHomeOutline } from "react-icons/io5";
+import { IoHome } from "react-icons/io5";
 import { FaBus } from "react-icons/fa";
-import { MdOutlinePayment } from "react-icons/md";
 import { FaBusAlt } from "react-icons/fa";
-import { MdPlace } from "react-icons/md";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
+import logo from "../../public/logo.png"
+
 
 const AdminDashboard = () => {
     return (
@@ -21,11 +23,17 @@ const AdminDashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                             {/* Sidebar content here */}
-                            <li><NavLink to={"/admin"} end><IoHomeOutline/> Dashboard</NavLink></li>
-                            <li><NavLink to={"busInfo"}><FaBus/> Bus Details</NavLink></li>
-                            <li><NavLink to={"ticketInfo"}><span className="text-lg"><MdOutlinePayment/></span> Booking History</NavLink></li>
-                            <li><NavLink to={"add_Bus"}><span className=""><FaBusAlt/></span> Add New Bus</NavLink></li>
-                            <li><NavLink to={"add_Route"}><span className="text-lg"><MdPlace/></span> Add New Route</NavLink></li>
+                            <li className="flex justify-center items-center">
+                                <NavLink to="/" end className="w-full flex justify-center items-center">
+                                    <img src={"https://i.ibb.co/prHkLBJ/bus-ticket-pro-logo-final.png"} className="h-24" alt="Bus Ticket Pro" />
+                                </NavLink>
+                            </li>
+
+                            <li><NavLink to={"/admin"} end><span className="text-lg"><IoHome /></span> Dashboard</NavLink></li>
+                            <li><NavLink to={"busInfo"}><span className="text-lg"><FaBus /></span> Bus Details</NavLink></li>
+                            <li><NavLink to={"ticketInfo"}><span className="text-lg"><FaWallet /></span> Booking History</NavLink></li>
+                            <li><NavLink to={"add_Bus"}><span className="text-lg"><FaBusAlt /></span> Add New Bus</NavLink></li>
+                            <li><NavLink to={"add_Route"}><span className="text-lg"><FaMapMarkerAlt /></span> Add New Route</NavLink></li>
                         </ul>
                     </div>
                 </div>
