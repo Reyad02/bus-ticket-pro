@@ -24,20 +24,22 @@ const AddRoute = () => {
             routeName: data.routeName,
             stops: stops
         }
-        // axios.post("/addBus", { details })
-        //     .then(response => {
-        //         console.log(response.data)
-        //         if (response.data.insertedId) {
-        //             navigate("/admin/busInfo");
-        //         }
-        //     })
+        console.log(details);
+        axios.post("/new_route", { details })
+            .then(response => {
+                console.log(response.data)
+                setIsModalOpen(false);
+                if (response.data.insertedId) {
+                    refetch();
+                }
+            })
 
     }
 
     const handleAddRoute = () => {
         setIsModalOpen(true);
     }
-    
+
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
@@ -79,7 +81,7 @@ const AddRoute = () => {
                                     routes.map((route, idx) => (
                                         <tr key={idx} className="hover">
                                             <td>{route.routeName}</td>
-                                            <td>{route.stops.join(" → ")}</td>
+                                            <td>{route.stops?.join(" → ")}</td>
                                         </tr>
                                     ))
                                 }
@@ -87,18 +89,7 @@ const AddRoute = () => {
                         </table>
                     </div>
                 </div>
-                {/* <div className="mt-8 bg-base-200 px-4 pt-12 pb-8 rounded-md ">
-                    <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-                        <p className="flex gap-2 w-[48%]"><strong>Route:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("routeName")} /></p>
-                        <p className="flex gap-2 w-[48%]"><strong>Bus Stops:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" {...register("bus_stops")} /></p>
 
-                        {errors.exampleRequired && <span>This field is required</span>}
-
-                        <div className="mt-2 text-center">
-                            <input className="btn bg-blue-200 text-blue-700 mt-4" type="submit" />
-                        </div>
-                    </form>
-                </div> */}
                 {isModalOpen && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="modal-box bg-white p-6 rounded-lg">
@@ -106,7 +97,7 @@ const AddRoute = () => {
                             <form className="space-y-1" onSubmit={handleSubmit(onSubmit)}>
                                 {/* register your input into the hook by invoking the "register" function */}
                                 <p className="flex gap-2 "><strong>Route:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("routeName")} /></p>
-                                <p className="flex gap-2 "><strong>Bus Stops:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" {...register("bus_stops")} /></p>
+                                <p className="flex gap-2 "><strong>Bus Stops:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder={"Please write stops using comma separated..."} {...register("bus_stops")} /></p>
 
                                 {errors.exampleRequired && <span>This field is required</span>}
 
