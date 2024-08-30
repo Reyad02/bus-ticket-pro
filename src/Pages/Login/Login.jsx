@@ -19,9 +19,9 @@ const Login = () => {
             // Signed up 
             const user = userCredential.user;
             setError(null);
-            console.log(location.state);
             if (email === import.meta.env.VITE_ADMIN) {
-                navigate("/admin")
+                // navigate("/admin")
+                window.location.replace("http://localhost:5173/admin");
             }
             else {
                 if (location?.state == "/admin") {

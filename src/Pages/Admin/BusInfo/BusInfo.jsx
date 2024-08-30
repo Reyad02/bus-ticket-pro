@@ -1,14 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form"
+import { AuthContext } from "../../../provider/AuthProvider";
 
 
 const BusInfo = () => {
+    const { user } = useContext(AuthContext);
+    const token = localStorage.getItem("token");
     const { isPending, isError, data: busDetails, error, refetch } = useQuery({
         queryKey: ["busDetails"],
-        queryFn: () => axios.get("/allBusInfo").then(res => res.data)
+        queryFn: () => axios.get("/allBusInfo", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        }).then(res => res.data)
     })
     // const [busDetails, setBusDetails] = useState([]);
     const [selectedBus, setSelectedBus] = useState(null);
@@ -25,9 +33,14 @@ const BusInfo = () => {
     const onSubmit = (data) => {
         console.log(data)
         setIsModalOpen(false);
-        data.token = localStorage.getItem("token"),
+        // data.token = localStorage.getItem("token"),
 
-            axios.put(`/busInfo/update/${data.bus_num}`, data)
+            axios.put(`/busInfo/update/${data.bus_num}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Email: user.email // Assuming `user.email` contains the user's email
+                }
+            })
                 .then(res => {
                     if (res.data.modifiedCount > 0) {
                         refetch();
@@ -65,7 +78,12 @@ const BusInfo = () => {
 
     const handleDelete = (num) => {
         // console.log(num)
-        axios.delete(`/busInfo/delete/${num}`)
+        axios.delete(`/busInfo/delete/${num}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(res => {
                 // console.log(res.data)
                 if (res.data.deletedCount > 0) {

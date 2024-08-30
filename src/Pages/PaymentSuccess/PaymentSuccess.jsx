@@ -61,9 +61,15 @@ const PaymentSuccess = () => {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+
         axios.get(`/getTicket/${id}`, {
             params: {
                 tran_id: id
+            }
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         })
             .then(res => {

@@ -19,6 +19,7 @@ import BookedTicket from "../Pages/Admin/BookedTicket/BookedTicket";
 import AddBus from "../Pages/Admin/AddBus/AddBus";
 import AddRoute from "../Pages/Admin/AddRoute/AddRoute";
 import UserDashboard from "../Pages/UserDashboard/UserDashboard";
+import AdminPrivateRoute from "./AdminPrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -63,41 +64,41 @@ const router = createBrowserRouter([
             },
             {
                 path: "/paymentSuccess/:id",
-                element: <PaymentSuccess></PaymentSuccess>
+                element: <PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
             },
             {
                 path: "/paymentFail/:id",
-                element: <PaymentFail></PaymentFail>
+                element: <PrivateRoute><PaymentFail></PaymentFail></PrivateRoute>
             },
             {
                 path: "/dashboard",
-                element: <UserDashboard></UserDashboard>
+                element: <PrivateRoute><UserDashboard></UserDashboard></PrivateRoute>
             },
         ],
     },
     {
         path: "/admin",
-        element: <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
+        element: <PrivateRoute><AdminPrivateRoute><AdminDashboard></AdminDashboard></AdminPrivateRoute></PrivateRoute>,
         children: [
             {
                 path: "",
-                element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
+                element: <PrivateRoute><AdminPrivateRoute><DashBoard></DashBoard></AdminPrivateRoute></PrivateRoute>
             },
             {
                 path: "busInfo",
-                element: <PrivateRoute><BusInfo></BusInfo></PrivateRoute>
+                element: <PrivateRoute><AdminPrivateRoute><BusInfo></BusInfo></AdminPrivateRoute></PrivateRoute>
             },
             {
                 path: "ticketInfo",
-                element: <PrivateRoute><BookedTicket></BookedTicket></PrivateRoute>
+                element: <PrivateRoute><AdminPrivateRoute><BookedTicket></BookedTicket></AdminPrivateRoute></PrivateRoute>
             },
             {
                 path: "add_Bus",
-                element: <PrivateRoute><AddBus></AddBus></PrivateRoute>
+                element: <PrivateRoute><AdminPrivateRoute><AddBus></AddBus></AdminPrivateRoute></PrivateRoute>
             },
             {
                 path: "add_Route",
-                element: <PrivateRoute><AddRoute></AddRoute></PrivateRoute>
+                element: <PrivateRoute><AdminPrivateRoute><AddRoute></AddRoute></AdminPrivateRoute></PrivateRoute>
             },
         ]
     },

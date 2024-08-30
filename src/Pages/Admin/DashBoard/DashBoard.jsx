@@ -2,28 +2,49 @@ import { MdOutlinePayment } from "react-icons/md";
 import { FaBus } from "react-icons/fa";
 import { IoTicket } from "react-icons/io5";
 import { MdPlace } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const DashBoard = () => {
+    const { user } = useContext(AuthContext);
+
     const [totalPayment, setTotalPayment] = useState(0);
     const [totalBus, setTotalBus] = useState(0);
     const [totalOrderCount, setTotalOrderCount] = useState(0);
     const [totalAreaCount, setTotalAreaCount] = useState(0);
     useEffect(() => {
-        axios.get("/totalPayments")
+        const token = localStorage.getItem("token");
+        // console.log("token ", token)
+
+        axios.get("/totalPayments", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(res => {
                 setTotalPayment(res.data.totalPayment);
                 setTotalOrderCount(res.data.countTotalOrder);
             });
 
-        axios.get("/totalBusCount")
+        axios.get("/totalBusCount", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(res => setTotalBus(res.data.totalBusCount));
 
-        axios.get("/totalCounter")
+        axios.get("/totalCounter", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(res => setTotalAreaCount(res.data.totalCounter));
-    }, [])
+    }, [user?.email])
     return (
         <div>
             <Helmet>

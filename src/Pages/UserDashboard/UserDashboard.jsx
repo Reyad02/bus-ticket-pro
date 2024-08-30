@@ -8,9 +8,16 @@ import jsPDF from 'jspdf';
 const UserDashboard = () => {
     const [ticketDetails, setTicketDetails] = useState([]);
     const { user } = useContext(AuthContext);
+    console.log(user?.email);
 
     const handleTicket = (id) => {
-        axios.get(`/getTicket/${id}`)
+        const token = localStorage.getItem("token");
+
+        axios.get(`/getTicket/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response.data)
                 const { bus_name, email, money, name, paidStatus, seats, tran_id, pickPoint, dropPoint, journeyDate } = response.data;
@@ -62,7 +69,13 @@ const UserDashboard = () => {
     }
 
     useEffect(() => {
-        axios.get(`/booked/${user?.email}`)
+        const token = localStorage.getItem("token");
+
+        axios.get(`/booked/${user.email}`, {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response.data)
                 setTicketDetails(response.data);

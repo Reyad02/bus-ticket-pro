@@ -1,16 +1,25 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const BookedTicket = () => {
+    const { user } = useContext(AuthContext);
+
     const [ticketDetails, setTicketDetails] = useState([]);
     useEffect(() => {
-        axios.get("/allTicketInfo")
+        const token = localStorage.getItem("token");
+        axios.get("/allTicketInfo", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(response => {
                 console.log(response.data)
                 setTicketDetails(response.data);
             })
-    }, [])
+    }, [user?.email])
     return (
         <div>
             <Helmet>

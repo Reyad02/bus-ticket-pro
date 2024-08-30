@@ -1,15 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form"
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const AddRoute = () => {
+    const token = localStorage.getItem("token");
+    const { user } = useContext(AuthContext);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { isPending, isError, data: routes, error, refetch } = useQuery({
         queryKey: ["busDetails"],
-        queryFn: () => axios.get("/routes").then(res => res.data)
+        queryFn: () => axios.get("/routes", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        }).then(res => res.data)
     })
     const {
         register,
@@ -24,8 +33,13 @@ const AddRoute = () => {
             routeName: data.routeName,
             stops: stops
         }
-        console.log(details);
-        axios.post("/new_route", { details })
+        // console.log(details);
+        axios.post("/new_route", { details }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(response => {
                 console.log(response.data)
                 setIsModalOpen(false);

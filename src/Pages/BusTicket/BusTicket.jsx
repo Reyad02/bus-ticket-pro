@@ -48,14 +48,19 @@ const BusTicket = () => {
                         bus_name: bus_name,
                         seats: selectedSeats,
                         money: selectedSeats.length * busInfo.price,
-                        token: localStorage.getItem("token"),
+                        // token: localStorage.getItem("token"),
                         name: user?.displayName,
                         pickPoint: pickPoint,
                         dropPoint: dropPoint,
                         journeyDate: journeyDate
                     }
+                    const token = localStorage.getItem("token");
 
-                    axios.post("/order", info).then(res => {
+                    axios.post("/order", info, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }).then(res => {
                         console.log(res.data.url)
                         window.location.replace(res.data.url);
                     }).catch(error => {

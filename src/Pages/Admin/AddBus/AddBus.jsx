@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const AddBus = () => {
+    const { user } = useContext(AuthContext);
+
     const [route_options, setRoute_Options] = useState([]);
     const navigate = useNavigate();
 
@@ -32,7 +35,14 @@ const AddBus = () => {
             isGoing: data.isGoing === "true" ? true : false,
             routeName: data.routeName
         }
-        axios.post("/addBus", { details })
+        const token = localStorage.getItem("token");
+
+        axios.post("/addBus", { details },{
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
             .then(response => {
                 console.log(response.data)
                 if (response.data.insertedId) {
@@ -64,8 +74,8 @@ const AddBus = () => {
                             <p className="flex gap-2 w-[48%]"><strong>Seat Layout:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded " {...register("seat_layout")} /></p>
                         </div>
                         <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Arrival Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("arrival_time")} /></p>
                             <p className="flex gap-2 w-[48%]"><strong>Departure Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("departure_time")} /></p>
+                            <p className="flex gap-2 w-[48%]"><strong>Arrival Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("arrival_time")} /></p>
                         </div>
                         <div className="flex gap-8">
                             <p className="flex gap-2 w-[48%]"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder="$ 0.00" {...register("price")} /></p>
