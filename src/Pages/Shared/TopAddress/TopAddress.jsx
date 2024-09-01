@@ -39,19 +39,19 @@ const TopAddress = () => {
                 <div className="flex border border-slate-300 items-center  gap-4 p-2 bg-white">
                     {
                         user ? <>
-                            <button className="flex items-center gap-0 text-green-700 font-semibold hover:bg-green-50 rounded-md " onClick={handleLogout}>
+                            <button className="flex items-center gap-0 text-green-700 font-semibold hover:bg-green-50  " onClick={handleLogout}>
                                 <CgLogOut className="font-extrabold  text-xl mt-1"></CgLogOut>
                                 <p>Logout</p>
                             </button>
 
                         </> :
                             <>
-                                <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 rounded-md " to={"/Signin"}>
+                                <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 " to={"/Signin"}>
                                     <MdLogin className="font-extrabold  "></MdLogin>
                                     <p>Sing In</p>
                                 </Link>
                                 <p>/</p>
-                                <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 rounded-md " to={"/registration"}>
+                                <Link className="flex items-center gap-1 text-green-700 font-semibold hover:bg-green-50 " to={"/registration"}>
                                     <FaUserPlus></FaUserPlus>
                                     <p>Sing Up</p>
                                 </Link>
