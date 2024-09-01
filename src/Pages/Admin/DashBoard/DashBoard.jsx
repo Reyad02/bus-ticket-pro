@@ -37,13 +37,17 @@ const DashBoard = () => {
         })
             .then(res => setTotalBus(res.data.totalBusCount));
 
-        axios.get("/totalCounter", {
+        axios.get("/allStops", {
             headers: {
                 Authorization: `Bearer ${token}`,
                 Email: user.email // Assuming `user.email` contains the user's email
             }
         })
-            .then(res => setTotalAreaCount(res.data.totalCounter));
+            .then(res => {
+                // console.log(res.data.length)
+                setTotalAreaCount(res.data?.length)
+            }
+            );
     }, [user?.email])
     return (
         <div>

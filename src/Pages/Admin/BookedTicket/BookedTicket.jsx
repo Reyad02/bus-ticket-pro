@@ -5,8 +5,8 @@ import { AuthContext } from "../../../provider/AuthProvider";
 
 const BookedTicket = () => {
     const { user } = useContext(AuthContext);
-
     const [ticketDetails, setTicketDetails] = useState([]);
+    
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios.get("/allTicketInfo", {
@@ -20,6 +20,7 @@ const BookedTicket = () => {
                 setTicketDetails(response.data);
             })
     }, [user?.email])
+
     return (
         <div>
             <Helmet>

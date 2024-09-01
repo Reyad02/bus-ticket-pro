@@ -4,7 +4,6 @@ import { FaBus } from "react-icons/fa";
 import { FaBusAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaWallet } from "react-icons/fa";
-import logo from "../../public/logo.png"
 import TopAddress from "../Pages/Shared/TopAddress/TopAddress";
 
 
@@ -13,7 +12,7 @@ const AdminDashboard = () => {
         <div>
             <TopAddress />
             <div className="flex gap-8">
-                <div>
+                <div className="relative grid ">
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                         <div className="drawer-content flex flex-col items-center justify-center ">

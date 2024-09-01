@@ -15,7 +15,8 @@ const UserDashboard = () => {
 
         axios.get(`/getTicket/${id}`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
             }
         })
             .then(response => {

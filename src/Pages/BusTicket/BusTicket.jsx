@@ -56,11 +56,14 @@ const BusTicket = () => {
                     }
                     const token = localStorage.getItem("token");
 
-                    axios.post("/order", info, {
+                    axios.post("/order", info,
+                         {
                         headers: {
-                            Authorization: `Bearer ${token}`
+                            Authorization: `Bearer ${token}`,
+                            // Email: user.email // Assuming `user.email` contains the user's email
                         }
-                    }).then(res => {
+                    }
+                ).then(res => {
                         console.log(res.data.url)
                         window.location.replace(res.data.url);
                     }).catch(error => {
