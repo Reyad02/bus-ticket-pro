@@ -11,7 +11,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { MdDateRange } from "react-icons/md";
-import Footer from '../../Shared/Footer/Footer';
 
 const Second_Part = () => {
     return (

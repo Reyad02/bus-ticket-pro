@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import axios from "axios";
@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
+
 
 
     const registration = (email, password) => {
@@ -38,11 +40,16 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider)
     }
 
+    const facebookLogin = () => {
+        setLoading(true);
+        return signInWithPopup(auth, facebookProvider)
+    }
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            // console.log(currentUser);
+            console.log(currentUser);
             const userEmail = { email: currentUser?.email || user?.email }
             if (currentUser) {
                 axios.post("/jwt", userEmail)
@@ -62,7 +69,7 @@ const AuthProvider = ({ children }) => {
     }, [user?.email])
 
     const AuthInfo = {
-        user, loading, setLoading, login, logout, registration, googleLogin, update
+        user, loading, setLoading, login, logout, registration, googleLogin, update, facebookLogin
     }
 
     return (
