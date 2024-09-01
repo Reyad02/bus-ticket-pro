@@ -7,9 +7,10 @@ import { FaMeta } from "react-icons/fa6";
 
 const Login = () => {
     const [error, setError] = useState(null);
-    const { login, googleLogin, facebookLogin } = useContext(AuthContext);
+    const { login, googleLogin, facebookLogin, forgetPass } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const [forgetEmail, setForgetEmail] = useState("");
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -76,6 +77,21 @@ const Login = () => {
                 setError(errorMessage);
             });
     }
+
+    const handleForgetPass = () => {
+        // console.log("clicked")
+        // console.log(forgetEmail);
+        forgetPass(forgetEmail).then(() => {
+            // Password reset email sent!
+            // ..
+        })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
+    }
+
     return (
         <>
             <Helmet>
@@ -94,13 +110,16 @@ const Login = () => {
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" name="email" placeholder="Email" className="input input-bordered" required />
+                                    <input type="email" name="email" placeholder="Email" className="input input-bordered" required onBlur={(event) => setForgetEmail(event.target.value)} />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
                                     <input type="password" name="password" placeholder="******" className="input input-bordered" required />
+                                    <label className="label w-fit" >
+                                        <p onClick={handleForgetPass} className="label-text-alt link link-hover">Forgot password?</p>
+                                    </label>
                                 </div>
                                 <p className="text-red-600 text-sm">{error}</p>
                                 <div className="form-control mt-2">

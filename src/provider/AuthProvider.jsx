@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import axios from "axios";
@@ -45,11 +45,16 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, facebookProvider)
     }
 
+    const forgetPass = (email) => {
+        setLoading(true);
+        return sendPasswordResetEmail(auth, email)
+    }
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            console.log(currentUser);
+            // console.log(currentUser);
             const userEmail = { email: currentUser?.email || user?.email }
             if (currentUser) {
                 axios.post("/jwt", userEmail)
@@ -58,7 +63,7 @@ const AuthProvider = ({ children }) => {
                         // console.log(res.data)
                         localStorage.setItem("token", res.data);
                     })
-            }else{
+            } else {
                 localStorage.removeItem("token");
 
             }
@@ -69,7 +74,7 @@ const AuthProvider = ({ children }) => {
     }, [user?.email])
 
     const AuthInfo = {
-        user, loading, setLoading, login, logout, registration, googleLogin, update, facebookLogin
+        user, loading, setLoading, login, logout, registration, googleLogin, update, facebookLogin, forgetPass
     }
 
     return (
