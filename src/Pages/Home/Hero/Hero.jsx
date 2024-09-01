@@ -117,13 +117,13 @@ const Hero = () => {
     useEffect(() => {
         axios.get('/allStops')
             .then(function (response) {
-                console.log(response.data)
+                // console.log(response.data)
                 setAllareas(response.data)
                 // console.log(response.data);
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                // console.log(error);
             })
     }, [])
 
@@ -131,28 +131,25 @@ const Hero = () => {
         <div className="bg-transparent">
             <div className="hero  relative z-50">
                 <div className="hero-content w-full flex-col lg:flex-row ">
-                    <div className="text-center lg:text-left lg:w-1/2 space-y-6">
-                        <h1 className="text-5xl font-bold">Get Your Ticket Online, <br />Easy and Safely</h1>
-                        <button className="text-white font-bold uppercase btn bg-[#26A85E] ">
-                            Get Ticket Now
-                        </button>
+                    <div className="text-center lg:text-left lg:w-[40%] xl:w-1/2 space-y-3">
+                        <h1 className="text-5xl font-bold max-w-xl">Get Your Ticket Online, Easy and Safely</h1>
                     </div>
-                    <div className="lg:w-5/12  ">
-                        <p className="text-black text-2xl font-semibold mb-8">Choose Your Ticket</p>
+                    <div className="lg:w-[50%]  xl:w-[42%]">
+                        <p className="text-black text-2xl font-semibold mb-8 text-center lg:text-left">Choose Your Ticket</p>
                         <div className="card bg-base-100 shadow-2xl flex-1">
                             <form className="card-body" onSubmit={handleTicketForm}>
-                                <div className="flex gap-2 flex-col md:flex-row ">
+                                <div className="flex gap-2 flex-col lg:flex-row ">
 
                                     {/* pickupPoint */}
-                                    <div className="form-control w-1/2 ">
+                                    <div className="form-control w-full lg:w-1/2 ">
                                         <Select
-                                            className="input pl-12 shadow-lg "
+                                            className="input pl-12 shadow-lg text-base"
                                             placeholder="Pickup Point"
                                             options={allAreas}
                                             color="#26A85E"
                                             style={{
                                                 paddingLeft: '2.75rem',
-                                                fontSize: '1.2rem',
+                                                // fontSize: '1.2rem',
                                                 borderRadius: "0.5rem",
                                             }}
                                             onChange={values => setPickupPoint(values[0].value)}
@@ -165,7 +162,7 @@ const Hero = () => {
                                     </div>
 
                                     {/* dropping point */}
-                                    <div className="form-control w-1/2 ">
+                                    <div className="form-control w-full lg:w-1/2 text-base">
                                         <Select
                                             className="input pl-12 shadow-lg"
                                             placeholder="Dropping Point"
@@ -173,7 +170,7 @@ const Hero = () => {
                                             color="#26A85E"
                                             style={{
                                                 paddingLeft: '2.75rem',
-                                                fontSize: '1.2rem',
+                                                // fontSize: '1.2rem',
                                                 borderRadius: "0.5rem"
                                             }}
                                             onChange={values => setDroppingPoint(values[0].value)}

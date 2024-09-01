@@ -31,7 +31,7 @@ const BusInfo = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         setIsModalOpen(false);
         // data.token = localStorage.getItem("token"),
 
@@ -119,7 +119,7 @@ const BusInfo = () => {
                 <title>Ticket Pro - Bus Details</title>
             </Helmet>
             <div className="">
-                <h1 className="text-xl font-semibold">Bus Details</h1>
+                <h1 className="text-xl font-semibold text-center lg:text-left">Bus Details</h1>
                 <div className="mt-4">
                     <div className="overflow-x-auto">
                         <table className="table">

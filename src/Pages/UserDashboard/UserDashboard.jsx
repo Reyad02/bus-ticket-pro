@@ -8,7 +8,7 @@ import jsPDF from 'jspdf';
 const UserDashboard = () => {
     const [ticketDetails, setTicketDetails] = useState([]);
     const { user } = useContext(AuthContext);
-    console.log(user?.email);
+    // console.log(user?.email);
 
     const handleTicket = (id) => {
         const token = localStorage.getItem("token");
@@ -20,7 +20,7 @@ const UserDashboard = () => {
             }
         })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 const { bus_name, email, money, name, paidStatus, seats, tran_id, pickPoint, dropPoint, journeyDate } = response.data;
                 const doc = new jsPDF('p', 'pt', 'a4');
 
@@ -78,7 +78,7 @@ const UserDashboard = () => {
             }
         })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setTicketDetails(response.data);
             })
     }, [user?.email])
@@ -103,7 +103,7 @@ const UserDashboard = () => {
                                     <th>Fare</th>
                                     <th>Seats</th>
                                     <th>Status</th>
-                                    <th></th>
+                                    <th>Get Ticket</th>
                                 </tr>
                             </thead>
                             <tbody>

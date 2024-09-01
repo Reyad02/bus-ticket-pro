@@ -23,10 +23,10 @@ const Contact = () => {
             })
             .then(
                 () => {
-                    console.log('SUCCESS!');
+                    // console.log('SUCCESS!');
                 },
                 (error) => {
-                    console.log('FAILED...', error.text);
+                    // console.log('FAILED...', error.text);
                 },
             );
     };
@@ -37,38 +37,38 @@ const Contact = () => {
             </Helmet>
             <Banner title={"Contact Us"}></Banner>
             <SectionTitle title={"Let's get in touch"} subTitle={"We are open for any suggestion or just to have a chat"}></SectionTitle>
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div className="border rounded-md flex justify-between p-8 hover:border-green-700 hover:shadow-lg ">
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="border rounded-md flex gap-8 p-8 hover:border-green-700 hover:shadow-lg ">
                         <div className="text-4xl text-green-700 flex justify-center items-center">
                             <FaMapLocationDot></FaMapLocationDot>
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 w-56">
                             <h1 className="text-xl font-bold">Our Address</h1>
-                            <p>Address : Bengla Road Suite Dhaka 1209</p>
+                            <p>Address : Bangla Road Suite Dhaka 1209</p>
                         </div>
                     </div>
-                    <div className="border rounded-md flex justify-around p-8 hover:border-green-700 hover:shadow-lg ">
+                    <div className="border rounded-md flex gap-8 p-8 hover:border-green-700 hover:shadow-lg ">
                         <div className="text-4xl text-green-700 flex justify-center items-center">
                             <MdOutlineWifiCalling3></MdOutlineWifiCalling3>
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 w-56">
                             <h1 className="text-xl font-bold">Call Us</h1>
                             <p>Address : +880 12354 81209</p>
                         </div>
                     </div>
-                    <div className="border rounded-md flex justify-around p-8 hover:border-green-700 hover:shadow-lg ">
+                    <div className="border rounded-md flex gap-8 p-8 hover:border-green-700 hover:shadow-lg ">
                         <div className="text-3xl text-green-700 flex justify-center items-center">
                             <MdOutlineMail></MdOutlineMail>
                         </div>
-                        <div>
-                            <h1 className="text-xl font-bold">Email Us</h1>
+                        <div className="w-56">
+                            <h1 className="text-xl font-bold ">Email Us</h1>
                             <p>example@gmail.com</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-10 flex justify-between">
+                <div className="mt-10 flex justify-between flex-col lg:flex-row">
                     <div className="flex-1">
                         <form ref={form} onSubmit={sendEmail}>
                             <div className="py-4 w-full flex items-center ">

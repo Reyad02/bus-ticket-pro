@@ -64,14 +64,14 @@ const BusTicket = () => {
                         }
                     }
                 ).then(res => {
-                        console.log(res.data.url)
+                        // console.log(res.data.url)
                         window.location.replace(res.data.url);
                     }).catch(error => {
                         if (error.response && error.response.status === 401) {
-                            console.log(error)
+                            // console.log(error)
                             navigate("/Signin", { state: location });
                         } else {
-                            console.log("2nd", error);
+                            // console.log("2nd", error);
                         }
                     }
                     )
@@ -113,16 +113,16 @@ const BusTicket = () => {
             setSelectedSeats([]);
         }
 
-        console.log(journeyDate)
+        // console.log(journeyDate)
         const encodedJourneyDate = encodeURIComponent(journeyDate);
-        console.log(encodedJourneyDate)
+        // console.log(encodedJourneyDate)
         axios.get(`/seatInfo/${bus_name}/${encodedJourneyDate}`, {
             params: {
                 bus_name: bus_name,
                 journeyDate: encodedJourneyDate
             }
         }).then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             setBookedSeats(response.data);
         })
 

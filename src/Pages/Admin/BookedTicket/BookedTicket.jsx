@@ -6,7 +6,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 const BookedTicket = () => {
     const { user } = useContext(AuthContext);
     const [ticketDetails, setTicketDetails] = useState([]);
-    
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios.get("/allTicketInfo", {
@@ -16,7 +16,7 @@ const BookedTicket = () => {
             }
         })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setTicketDetails(response.data);
             })
     }, [user?.email])
@@ -27,7 +27,7 @@ const BookedTicket = () => {
                 <title>Ticket Pro - Booking History</title>
             </Helmet>
             <div className="">
-                <h1 className="text-xl font-semibold">Booking History</h1>
+                <h1 className="text-xl font-semibold text-center lg:text-left">Booking History</h1>
                 <div className="mt-4">
                     <div className="overflow-x-auto">
                         <table className="table">

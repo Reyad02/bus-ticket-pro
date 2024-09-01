@@ -5,23 +5,24 @@ import { FaBusAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaWallet } from "react-icons/fa";
 import TopAddress from "../Pages/Shared/TopAddress/TopAddress";
+import { IoMenu } from "react-icons/io5";
 
 
 const AdminDashboard = () => {
     return (
         <div>
             <TopAddress />
-            <div className="flex gap-8">
+            <div className="flex mt-4 lg:mt-0 flex-col lg:flex-row lg:gap-8 px-4">
                 <div className="relative grid ">
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content flex flex-col items-center justify-center ">
+                        <div className="drawer-content flex flex-col">
                             {/* Page content here */}
-                            <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
-                                Open drawer
+                            <label htmlFor="my-drawer-2" className="btn w-fit drawer-button lg:hidden">
+                                <IoMenu className="text-2xl" /> {/* Use the icon and adjust size if needed */}
                             </label>
                         </div>
-                        <div className="drawer-side">
+                        <div className="drawer-side z-50">
                             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                                 {/* Sidebar content here */}

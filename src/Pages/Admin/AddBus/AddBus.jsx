@@ -44,7 +44,7 @@ const AddBus = () => {
             }
         })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 if (response.data.insertedId) {
                     navigate("/admin/busInfo");
                 }
@@ -65,38 +65,38 @@ const AddBus = () => {
                 <title>Ticket Pro - Add Bus</title>
             </Helmet>
             <div className="">
-                <h1 className="text-xl font-semibold">New Bus</h1>
+                <h1 className="text-xl font-semibold text-center lg:text-left">New Bus</h1>
                 <div className="mt-8 bg-base-200 px-4 pt-12 pb-8 rounded-md ">
                     <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                         {/* register your input into the hook by invoking the "register" function */}
-                        <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Bus Number:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded "  {...register("bus_num")} /></p>
-                            <p className="flex gap-2 w-[48%]"><strong>Seat Layout:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded " {...register("seat_layout")} /></p>
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                            <p className="flex gap-2 w-full md:w-[48%]"><strong>Bus Number:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded "  {...register("bus_num")} /></p>
+                            <p className="flex gap-2 w-full md:w-[48%]"><strong>Seat Layout:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded " {...register("seat_layout")} /></p>
                         </div>
-                        <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Departure Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("departure_time")} /></p>
-                            <p className="flex gap-2 w-[48%]"><strong>Arrival Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("arrival_time")} /></p>
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                            <p className="flex gap-2 w-full md:w-[48%]"><strong>Departure Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("departure_time")} /></p>
+                            <p className="flex gap-2  w-full md:w-[48%]"><strong>Arrival Time:</strong> <input type="time" className="border-[#2B3440] flex-1 pl-2 rounded"  {...register("arrival_time")} /></p>
                         </div>
-                        <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder="$ 0.00" {...register("price")} /></p>
-                            <p className="flex gap-2 w-[48%]"><strong>Type:</strong>
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                            <p className="flex gap-2 w-full md:w-[48%]"><strong>Price:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder="$ 0.00" {...register("price")} /></p>
+                            <p className="flex gap-2  w-full md:w-[48%]"><strong>Type:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("type")}>
                                     <option value="AC">AC</option>
                                     <option value="Non-AC">Non-AC</option>
                                 </select>
                             </p>
                         </div>
-                        <div className="flex gap-8">
-                            <p className="flex gap-2 w-[48%]"><strong>Facilities:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder={"Please write facilities using comma separated..."} {...register("facilities")} /></p>
-                            <p className="flex gap-2 w-[48%]"><strong>Direction:</strong>
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                            <p className="flex gap-2  w-full md:w-[48%]"><strong>Facilities:</strong> <input className="border-[#2B3440] flex-1 pl-2 rounded" placeholder={"Please write facilities using comma separated..."} {...register("facilities")} /></p>
+                            <p className="flex gap-2  w-full md:w-[48%]"><strong>Direction:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("isGoing")}>
                                     <option value={true}>Going</option>
                                     <option value={false}>Coming</option>
                                 </select>
                             </p>
                         </div>
-                        <div className="flex gap-8">
-                            <p className="flex gap-2 w-[99%]"><strong>Route:</strong>
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8 border ">
+                            <p className="flex gap-2 w-full"><strong>Route:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("routeName")}>
                                     {
                                         route_options.map(eachRoute => (

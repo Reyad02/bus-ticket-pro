@@ -12,8 +12,8 @@ const FAQ = () => {
             <Banner title={"FAQs"}></Banner>
             <SectionTitle title={"Frequently Asked Questions"} subTitle={"Nobis minus earum perferendis nemo cupiditate optio, rem neque incidunt quia laborum ut praesentium corporis quam exercitationem, atque illo aut excepturi cum."}></SectionTitle>
 
-            <div className="max-w-7xl mx-auto">
-                <div className="flex justify-between flex-col lg:flex-row gap-10">
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="flex justify-between flex-col lg:flex-row gap-4 lg:gap-10">
                     <div className=" flex-1 space-y-4">
                         <div className="collapse collapse-plus border rounded-none bg-transparent ">
                             <input type="radio" name="my-accordion-3" defaultChecked/>

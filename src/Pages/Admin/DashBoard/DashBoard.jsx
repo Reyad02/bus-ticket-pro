@@ -50,14 +50,14 @@ const DashBoard = () => {
             );
     }, [user?.email])
     return (
-        <div>
+        <div className="">
             <Helmet>
                 <title>Ticket Pro - Admin Dashboard</title>
             </Helmet>
-            <h1 className="text-xl font-semibold">Dashboard</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8 transition-all">
+            <h1 className="text-xl font-semibold text-center lg:text-left">Dashboard</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8 transition-all">
 
-                <div className="border-green-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md">
+                <div className="border-green-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md mx-auto">
                     <div className="bg-green-200 p-3 text-3xl text-green-700">
                         <MdOutlinePayment />
                     </div>
@@ -67,7 +67,7 @@ const DashBoard = () => {
                     </div>
                 </div>
 
-                <div className="border-blue-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md">
+                <div className="border-blue-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md mx-auto">
                     <div className="bg-blue-200 p-4 text-2xl text-blue-700">
                         <FaBus />
                     </div>
@@ -77,7 +77,7 @@ const DashBoard = () => {
                     </div>
                 </div>
 
-                <div className="border-red-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md">
+                <div className="border-red-700 w-60 h-28 flex items-center px-4 gap-6 border rounded-md mx-auto">
                     <div className="bg-red-200 p-4 text-2xl text-red-700">
                         <IoTicket />
                     </div>
@@ -87,7 +87,7 @@ const DashBoard = () => {
                     </div>
                 </div>
 
-                <div className="border-[#FF9F43] w-60 h-28 flex items-center px-4 gap-6 border rounded-md">
+                <div className="border-[#FF9F43] w-60 h-28 flex items-center px-4 gap-6 border rounded-md mx-auto">
                     <div className="bg-[#FFECD9] p-3 text-3xl text-[#FF9F43]">
                         <MdPlace />
                     </div>

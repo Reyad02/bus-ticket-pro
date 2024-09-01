@@ -15,11 +15,11 @@ import Footer from '../../Shared/Footer/Footer';
 
 const Second_Part = () => {
     return (
-        <div className=''>
+        <div className='px-4'>
 
             {/* 1st part --> Ticket steps */}
 
-            <div className='max-w-7xl mx-auto'>
+            <div className='max-w-7xl mx-auto '>
                 <SectionTitle title={"Get Your Tickets With Just 3 Steps"} subTitle={"Have a look at our popular reason. why you should choose you bus. Just a Bus and get a ticket for your great journey. !"}></SectionTitle>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
 

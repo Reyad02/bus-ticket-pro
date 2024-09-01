@@ -41,7 +41,7 @@ const AddRoute = () => {
             }
         })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setIsModalOpen(false);
                 if (response.data.insertedId) {
                     refetch();
@@ -76,9 +76,9 @@ const AddRoute = () => {
                 <title>Ticket Pro - Add Bus</title>
             </Helmet>
             <div>
-                <h1 className="text-xl font-semibold">New Route</h1>
+                <h1 className="text-xl font-semibold text-center lg:text-left">New Route</h1>
                 <div className="mt-4">
-                    <div className="mb-4 text-center">
+                    <div className="mb-4 md:text-center">
                         <button onClick={handleAddRoute} className="btn">Add New Route</button>
                     </div>
                     <div className="overflow-x-auto">
