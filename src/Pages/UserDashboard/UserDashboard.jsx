@@ -26,7 +26,7 @@ const UserDashboard = () => {
 
                 // Load the logo image
                 const logo = new Image();
-                logo.src = "../../../public/logo.png"; // Ensure this path is correct
+                logo.src = "/logo.png"; // Ensure this path is correct
 
                 logo.onload = () => {
                     // Add the logo to the PDF

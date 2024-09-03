@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaWallet } from "react-icons/fa";
 import TopAddress from "../Pages/Shared/TopAddress/TopAddress";
 import { IoMenu } from "react-icons/io5";
+import Footer from "../Pages/Shared/Footer/Footer";
 
 
 const AdminDashboard = () => {
@@ -45,6 +46,7 @@ const AdminDashboard = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

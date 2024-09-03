@@ -7,13 +7,18 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaVimeoV } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 
 
 
 const Footer = () => {
+    const location = useLocation();
+    const currentPath = location.pathname;
+    // console.log(currentPath)
+
     return (
-        <div className="mt-8 bg-[#1E2A3F]">
+        <div className={`${currentPath.includes("admin") ? "mt-0" : "mt-8"}  bg-[#1E2A3F]`}>
             <footer className="footer max-w-7xl mx-auto p-10 text-white">
                 <aside className="space-y-0 ">
                     <img src={logo} className="w-28 " alt="" />
@@ -27,15 +32,15 @@ const Footer = () => {
                             </button>
 
                             <button className="btn btn-sm btn-circle btn-outline text-white hover:bg-green-700">
-                              <FaTwitter></FaTwitter>
+                                <FaTwitter></FaTwitter>
                             </button>
 
                             <button className="btn btn-sm btn-circle btn-outline text-white hover:bg-green-700">
-                              <FaVimeoV></FaVimeoV>
+                                <FaVimeoV></FaVimeoV>
                             </button>
 
                             <button className="btn btn-sm btn-circle btn-outline text-white hover:bg-green-700">
-                              <FaInstagram></FaInstagram>
+                                <FaInstagram></FaInstagram>
                             </button>
                         </div>
                     </div>

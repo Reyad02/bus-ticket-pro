@@ -55,7 +55,9 @@ const Navbar = ({isSticky}) => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link className="btn uppercase bg-green-700 text-white hover:opacity-90" to={"/buy-ticket"}>buy Tickets</Link>
+                    {
+                        user ? <p className="uppercase  text-green-700 hover:opacity-90">Hi, {user?.displayName}</p> : <></>
+                    }
                 </div>
             </div>
         </div>

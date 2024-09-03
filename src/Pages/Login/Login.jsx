@@ -22,8 +22,8 @@ const Login = () => {
             const user = userCredential.user;
             setError(null);
             if (email === import.meta.env.VITE_ADMIN) {
-                // navigate("/admin")
-                window.location.replace("http://localhost:5173/admin");
+                navigate("/admin")
+                // window.location.replace("http://localhost:5173/admin");
             }
             else {
                 if (location?.state == "/admin") {

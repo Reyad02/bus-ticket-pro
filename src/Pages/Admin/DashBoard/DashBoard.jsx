@@ -6,6 +6,9 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { PieChart } from 'react-minimal-pie-chart';
+import { NavLink } from "react-router-dom";
+
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext);
@@ -14,6 +17,8 @@ const DashBoard = () => {
     const [totalBus, setTotalBus] = useState(0);
     const [totalOrderCount, setTotalOrderCount] = useState(0);
     const [totalAreaCount, setTotalAreaCount] = useState(0);
+    const [busCount, setBusCount] = useState([]);
+    const [recentBooked, setRecentBooked] = useState([]);
     useEffect(() => {
         const token = localStorage.getItem("token");
         // console.log("token ", token)
@@ -46,6 +51,31 @@ const DashBoard = () => {
             .then(res => {
                 // console.log(res.data.length)
                 setTotalAreaCount(res.data?.length)
+            }
+            );
+
+        axios.get("/order/bus-count", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
+            .then(res => {
+                // console.log(res.data.length)
+                // console.log(res.data)
+                setBusCount(res.data)
+            }
+            );
+
+        axios.get("/latestOrder", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Email: user.email // Assuming `user.email` contains the user's email
+            }
+        })
+            .then(res => {
+                // console.log(res.data);
+                setRecentBooked(res.data);
             }
             );
     }, [user?.email])
@@ -96,6 +126,58 @@ const DashBoard = () => {
                         <p className="text-2xl font-semibold">{totalAreaCount}</p>
                     </div>
                 </div>
+            </div>
+
+            <div className="mt-4 md:mt-8 flex flex-col  items-center lg:gap-8">
+                <div className="w-full md:w-1/2 lg:w-1/3  ">
+                    <h1 className="text-center text-xl font-semibold">Total AC and Non-AC booked bus status</h1>
+                    <PieChart className=""
+                        data={[
+                            { title: busCount[0] !== undefined ? busCount[0]?._id : "", value: busCount[0] !== undefined ? busCount[0]?.count : 0, color: '#E38627' },
+                            { title: busCount[1] !== undefined ? busCount[1]?._id : "", value: busCount[1] !== undefined ? busCount[1]?.count : 0, color: '#C13C37' },
+                        ]}
+                        radius={42}
+                        label={({ dataEntry }) => dataEntry.title}
+                        labelStyle={{
+                            fontSize: '5px',
+                            fontFamily: 'sans-serif',
+                        }}
+                    />
+                </div>
+            </div>
+
+            <div className="">
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr className="bg-[#2B3440] text-[#D7DDE4]">
+                                <th>Bus Number</th>
+                                <th>User</th>
+                                <th>Journey Date</th>
+                                <th>Amount</th>
+                                <th>Seats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                recentBooked.map((ticket) => (
+                                    <tr key={ticket._id} className="hover">
+                                        <td>{ticket.bus_name}</td>
+                                        <td>{ticket.name}</td>
+                                        <td>{ticket.journeyDate}</td>
+                                        <td>${ticket.money}.00</td>
+                                        <td>{ticket.seats.join(', ')}</td>
+                                    </tr>
+                                ))
+                            }
+                            <td colSpan="5" className="text-right">
+                                <NavLink to={"ticketInfo"} className="btn btn-sm">See More</NavLink>
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
 

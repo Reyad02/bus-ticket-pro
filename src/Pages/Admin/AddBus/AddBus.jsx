@@ -95,7 +95,7 @@ const AddBus = () => {
                                 </select>
                             </p>
                         </div>
-                        <div className="flex flex-col md:flex-row gap-4 md:gap-8 border ">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8 ">
                             <p className="flex gap-2 w-full"><strong>Route:</strong>
                                 <select className="border-[#2B3440] flex-1 pl-2 rounded" {...register("routeName")}>
                                     {

@@ -5,7 +5,7 @@ import Navbar from '../Pages/Shared/Navbar/Navbar';
 import Footer from '../Pages/Shared/Footer/Footer';
 import axios from 'axios';
 
-axios.defaults.baseURL="http://localhost:3000";
+axios.defaults.baseURL="https://bus-ticket-backend-nine.vercel.app";
 
 const Main = () => {
     const [scrollY, setScrollY] = useState(0);

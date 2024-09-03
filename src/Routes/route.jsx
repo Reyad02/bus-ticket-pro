@@ -20,11 +20,13 @@ import AddBus from "../Pages/Admin/AddBus/AddBus";
 import AddRoute from "../Pages/Admin/AddRoute/AddRoute";
 import UserDashboard from "../Pages/UserDashboard/UserDashboard";
 import AdminPrivateRoute from "./AdminPrivateRoute";
+import Error from "../Pages/Error/Error";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: "/",
@@ -78,27 +80,27 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <PrivateRoute><AdminPrivateRoute><AdminDashboard></AdminDashboard></AdminPrivateRoute></PrivateRoute>,
+        element: <AdminPrivateRoute><AdminDashboard></AdminDashboard></AdminPrivateRoute>,
         children: [
             {
                 path: "",
-                element: <PrivateRoute><AdminPrivateRoute><DashBoard></DashBoard></AdminPrivateRoute></PrivateRoute>
+                element: <AdminPrivateRoute><DashBoard></DashBoard></AdminPrivateRoute>
             },
             {
                 path: "busInfo",
-                element: <PrivateRoute><AdminPrivateRoute><BusInfo></BusInfo></AdminPrivateRoute></PrivateRoute>
+                element: <AdminPrivateRoute><BusInfo></BusInfo></AdminPrivateRoute>
             },
             {
                 path: "ticketInfo",
-                element: <PrivateRoute><AdminPrivateRoute><BookedTicket></BookedTicket></AdminPrivateRoute></PrivateRoute>
+                element: <AdminPrivateRoute><BookedTicket></BookedTicket></AdminPrivateRoute>
             },
             {
                 path: "add_Bus",
-                element: <PrivateRoute><AdminPrivateRoute><AddBus></AddBus></AdminPrivateRoute></PrivateRoute>
+                element: <AdminPrivateRoute><AddBus></AddBus></AdminPrivateRoute>
             },
             {
                 path: "add_Route",
-                element: <PrivateRoute><AdminPrivateRoute><AddRoute></AddRoute></AdminPrivateRoute></PrivateRoute>
+                element: <AdminPrivateRoute><AddRoute></AddRoute></AdminPrivateRoute>
             },
         ]
     },
